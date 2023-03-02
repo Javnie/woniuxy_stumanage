@@ -13,7 +13,7 @@ public class DbHelper {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://61.139.65.134:31816/day021", "root", "123456");
+            connection = DriverManager.getConnection("jdbc:mysql://18.162.120.240:3306/day021", "root", "123456");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
