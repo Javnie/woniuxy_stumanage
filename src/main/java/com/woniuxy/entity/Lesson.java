@@ -1,23 +1,17 @@
 package com.woniuxy.entity;
 
-public class Clazz {
+public class Lesson {
     private int id;
     private String name;
+    private int teacherId;
 
-    public Clazz() {
+    public Lesson() {
     }
 
-    public Clazz(int id) {
-        this.id = id;
-    }
-
-    public Clazz(int id, String name) {
+    public Lesson(int id, String name, int teacherId) {
         this.id = id;
         this.name = name;
-    }
-
-    public Clazz(String name) {
-        this.name = name;
+        this.teacherId = teacherId;
     }
 
     public int getId() {
@@ -36,11 +30,11 @@ public class Clazz {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Clazz{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public int getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 }
