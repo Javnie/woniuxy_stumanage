@@ -11,12 +11,12 @@ public class Clazz {
         this.id = id;
     }
 
-    public Clazz(int id, String name) {
-        this.id = id;
+    public Clazz(String name) {
         this.name = name;
     }
 
-    public Clazz(String name) {
+    public Clazz(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

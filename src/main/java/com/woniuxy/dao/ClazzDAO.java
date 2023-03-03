@@ -3,9 +3,6 @@ package com.woniuxy.dao;
 import com.woniuxy.entity.Clazz;
 import com.woniuxy.utility.DbHelper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 public class ClazzDAO {
@@ -22,25 +19,10 @@ public class ClazzDAO {
     }
 
     public Clazz getById(int id) {
-//        Clazz clazz = null;
-//
-//        try {
-//            Statement stmt = DbHelper.getConnection().createStatement();
-//            ResultSet resultSet = stmt.executeQuery("SELECT * FROM class WHERE id=2");
-//            while(resultSet.next()){
-//                int id01 = (Integer) resultSet.getObject(1);
-//                String name01 = (String) resultSet.getObject(2);
-//                clazz = new Clazz(id01, name01);
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return clazz;
-        return (Clazz) DbHelper.executeSQL("SELECT * FROM class WHERE id=?",new Clazz(id));
+        return DbHelper.executeSQL(Clazz.class, "SELECT id,class_name AS name FROM class WHERE id=?", id);
     }
 
     public List<Clazz> getAll() {
-        return null;
+        return DbHelper.executeSQL(Clazz.class, "SELECT id,class_name AS name FROM class");
     }
 }
