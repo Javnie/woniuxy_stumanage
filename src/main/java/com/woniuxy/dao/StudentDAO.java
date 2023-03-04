@@ -7,62 +7,66 @@ import com.woniuxy.utility.DbHelper;
 
 import java.util.List;
 
+import static com.woniuxy.utility.StringUtil.*;
+
 public class StudentDAO {
-    public void add (Student student){
+    public void add(Student student) {
         DbHelper.executeSQL("INSERT INTO student(stu_id,stu_name,stu_gender,stu_birthdate,class_id) values(?,?,?,?,?)",
-                student.getStuId(),student.getName(),student.getGender(),student.getBirthdate(),student.getClazzId());
+                student.getStuId(), student.getName(), student.getGender(), student.getBirthdate(), student.getClazzId());
     }
 
-    public void update(Student student){
-
-    }
-
-    public void delete(int id){
+    public void update(Student student) {
 
     }
 
-    public Student getById(int id){
+    public void delete(int id) {
+
+    }
+
+    public Student getById(int id) {
         return null;
     }
 
-    public List<Student> getAll(){
+    public List<Student> getAll() {
         return null;
     }
 
-    public PageBean<Student> getByCondition(StudentQO studentQO,int page){
-        int pageSize=3;
-        PageBean<Student> pageBean=new PageBean<>();
+    //--------------------------------------------
+
+    /**
+     * 分页查询/根据所给条件进行查询操作
+     *
+     * @param studentQO 查询条件
+     * @param page      页码
+     * @return 类型定义为Student的PageBean
+     */
+    public PageBean<Student> getByCondition(StudentQO studentQO, int page) {
+        int pageSize = 3;
+        PageBean<Student> pageBean = new PageBean<>();
 
         //1、根据条件查询指定页码数据
-        String sql="SELECT * FROM student WHERE 1=1";
-        if(studentQO.getStuId()!=0) sql+=" AND stu_id AS stuId= '"+studentQO.getStuId()+"'";
-        if(studentQO.getName()!=null) sql+=" AND stu_name AS name= '"+studentQO.getName()+"'";
-        if(studentQO.getGender()!=null) sql+=" AND stu_gender AS gender= '"+studentQO.getGender()+"'";
-        //4种日期情况
-        if(studentQO.getStart()!=null&&studentQO.getEnd()!=null) sql+=" AND WHERE stu_birthdate BETWEEN '"+studentQO.getStart()+"'"+" AND '"+studentQO.getEnd()+"'";
-        if(studentQO.getClazzId()!=null) sql+=" AND class_id AS clazzId= '"+studentQO.getClazzId()+"'";
-        System.out.println(sql);
-        List<Student> students= DbHelper.executeSQL(Student.class,sql);
+        String str = "SELECT id,stu_id AS stuId,stu_name AS name,stu_gender AS gender,stu_birthdate AS birthdate,class_id AS clazzId FROM student WHERE 1=1";
+        StringBuilder sql1 = new StringBuilder(str);
+        if (studentQO.getStuId() != 0) sql1.append(" AND stu_id= '%" + studentQO.getStuId() + "%'");
+        if (isNotEmpty(studentQO.getName())) sql1.append(" AND stu_name= '%" + studentQO.getName() + "%'");
+        if (isNotEmpty(studentQO.getGender())) sql1.append(" AND stu_gender= '%" + studentQO.getGender() + "%'");
+        //4种日期情况 --> undone
+        if (studentQO.getClazzId() != null) sql1.append(" AND class_id= '" + studentQO.getClazzId() + "'");
+        sql1.append(" LIMIT " + (page - 1) * pageSize + "," + pageSize);
+        System.out.println(sql1);
+        List<Student> students = DbHelper.executeSQL(Student.class, sql1.toString());
 
         //2、查询总数量，计算总页码
-        int totalNum= students.size();
-        int totalPage=totalNum%pageSize==0?totalNum/pageSize:((totalNum/pageSize)+1);
+        StringBuilder sql2 = new StringBuilder("SELECT count(*) FROM student WHERE 1=1");
+        if (studentQO.getStuId() != 0) sql2.append(" AND stu_id= '%" + studentQO.getStuId() + "%'");
+        if (isNotEmpty(studentQO.getName())) sql2.append(" AND stu_name= '%" + studentQO.getName() + "%'");
+        if (isNotEmpty(studentQO.getGender())) sql2.append(" AND stu_gender= '%" + studentQO.getGender() + "%'");
+        //4种日期情况 --> undone
+        if (studentQO.getClazzId() != null) sql2.append(" AND class_id= '" + studentQO.getClazzId() + "'");
 
-        int startIndex=0;
-        int endIndex=0;
-
-        if(page==1) {
-            endIndex=3;
-        }else {
-            startIndex=(startIndex-1)*3;
-        }
-        endIndex=startIndex+3;
-
-        if(endIndex>totalNum) endIndex=totalNum;
-
-        List<Student> studentsOfThisPage=students.subList(startIndex,endIndex);
-
-        pageBean.setData(studentsOfThisPage);
+        int totalNum = DbHelper.getScalar(sql2.toString());
+        int totalPage = totalNum % pageSize == 0 ? totalNum / pageSize : totalNum / pageSize + 1;
+        pageBean.setData(students);
         pageBean.setTotalPage(totalPage);
 
         return pageBean;

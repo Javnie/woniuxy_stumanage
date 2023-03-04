@@ -1,4 +1,9 @@
 package com.woniuxy.query;
+/**
+ * QO (Query Object)
+ * 用于表示一个数据数据查询的数据对象
+ * 与PO不同在于可以自定义查询属性，不需要定义全表的属性
+ */
 
 import java.time.LocalDate;
 

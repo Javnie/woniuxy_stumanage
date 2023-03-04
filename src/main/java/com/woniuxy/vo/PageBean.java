@@ -1,4 +1,9 @@
 package com.woniuxy.vo;
+/**
+ * VO（Value Object/View Object - 值对象/视图对象）
+ * Value Object，值对象，也称为业务对象
+ * 存活在业务层的，是业务逻辑使用的，它存活的目的就是为数据提供一个生存的地方（实际上跟DO有点类似）
+ */
 
 import java.util.List;
 

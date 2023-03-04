@@ -48,9 +48,9 @@ public class DbHelper {
                 t = c.newInstance();
                 for (Field field : f) {
                     field.setAccessible(true);
-                    if (field.getClass().equals(LocalDate.class)) {
+                    if (field.getType().equals(LocalDate.class)) {
                         String msg = resultSet.getString(field.getName());
-                        LocalDate date = LocalDate.parse(msg, DateTimeFormatter.ofPattern("YYYY-MM-DD"));
+                        LocalDate date = LocalDate.parse(msg, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                         field.set(t, date);
                     } else {
                         field.set(t, resultSet.getObject(field.getName()));
@@ -82,7 +82,13 @@ public class DbHelper {
                 T t = c.newInstance();
                 for (Field field : f) {
                     field.setAccessible(true);
-                    field.set(t, resultSet.getObject(field.getName()));
+                    if (field.getType() == LocalDate.class) {
+                        String msg = resultSet.getString(field.getName());
+                        LocalDate date = LocalDate.parse(msg, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        field.set(t, date);
+                    } else {
+                        field.set(t, resultSet.getObject(field.getName()));
+                    }
                 }
                 resultList.add(t);
             }
@@ -94,5 +100,21 @@ public class DbHelper {
             throw new RuntimeException(e);
         }
         return resultList;
+    }
+
+    public static int getScalar(String sql, Object... params) {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }
