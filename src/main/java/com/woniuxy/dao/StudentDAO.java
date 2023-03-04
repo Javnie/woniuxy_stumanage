@@ -47,20 +47,20 @@ public class StudentDAO {
         //1、根据条件查询指定页码数据
         String str = "SELECT id,stu_id AS stuId,stu_name AS name,stu_gender AS gender,stu_birthdate AS birthdate,class_id AS clazzId FROM student WHERE 1=1";
         StringBuilder sql1 = new StringBuilder(str);
-        if (studentQO.getStuId() != 0) sql1.append(" AND stu_id= '%" + studentQO.getStuId() + "%'");
-        if (isNotEmpty(studentQO.getName())) sql1.append(" AND stu_name= '%" + studentQO.getName() + "%'");
-        if (isNotEmpty(studentQO.getGender())) sql1.append(" AND stu_gender= '%" + studentQO.getGender() + "%'");
+        if (studentQO.getStuId() != 0) sql1.append(" AND stu_id= '" + studentQO.getStuId() + "'");
+        if (isNotEmpty(studentQO.getName())) sql1.append(" AND stu_name= '" + studentQO.getName() + "'");
+        if (isNotEmpty(studentQO.getGender())) sql1.append(" AND stu_gender= '" + studentQO.getGender() + "'");
         //4种日期情况 --> undone
         if (studentQO.getClazzId() != null) sql1.append(" AND class_id= '" + studentQO.getClazzId() + "'");
         sql1.append(" LIMIT " + (page - 1) * pageSize + "," + pageSize);
-        System.out.println(sql1);
+//        System.out.println(sql1);
         List<Student> students = DbHelper.executeSQL(Student.class, sql1.toString());
 
         //2、查询总数量，计算总页码
         StringBuilder sql2 = new StringBuilder("SELECT count(*) FROM student WHERE 1=1");
-        if (studentQO.getStuId() != 0) sql2.append(" AND stu_id= '%" + studentQO.getStuId() + "%'");
-        if (isNotEmpty(studentQO.getName())) sql2.append(" AND stu_name= '%" + studentQO.getName() + "%'");
-        if (isNotEmpty(studentQO.getGender())) sql2.append(" AND stu_gender= '%" + studentQO.getGender() + "%'");
+        if (studentQO.getStuId() != 0) sql2.append(" AND stu_id= '" + studentQO.getStuId() + "'");
+        if (isNotEmpty(studentQO.getName())) sql2.append(" AND stu_name= '" + studentQO.getName() + "'");
+        if (isNotEmpty(studentQO.getGender())) sql2.append(" AND stu_gender= '" + studentQO.getGender() + "'");
         //4种日期情况 --> undone
         if (studentQO.getClazzId() != null) sql2.append(" AND class_id= '" + studentQO.getClazzId() + "'");
 

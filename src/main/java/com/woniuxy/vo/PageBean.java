@@ -38,4 +38,12 @@ public class PageBean<T> {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+
+    @Override
+    public String toString() {
+        return "PageBean{" +
+                "totalPage=" + totalPage +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }
