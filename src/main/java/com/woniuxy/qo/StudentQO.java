@@ -1,4 +1,4 @@
-package com.woniuxy.query;
+package com.woniuxy.qo;
 /**
  * QO (Query Object)
  * 用于表示一个数据数据查询的数据对象

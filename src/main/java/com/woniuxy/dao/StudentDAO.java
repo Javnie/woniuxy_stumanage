@@ -2,7 +2,7 @@ package com.woniuxy.dao;
 
 import com.woniuxy.entity.Student;
 import com.woniuxy.vo.PageBean;
-import com.woniuxy.query.StudentQO;
+import com.woniuxy.qo.StudentQO;
 import com.woniuxy.utility.DbHelper;
 
 import java.util.List;
