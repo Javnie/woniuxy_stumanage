@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ClazzDAO {
     public void add(Clazz clazz) {
+        //增加业务判断clazz.getName()是否存在
         DbHelper.executeSQL("INSERT INTO class(class_name) values(?)", clazz.getName());
     }
 
@@ -20,6 +21,10 @@ public class ClazzDAO {
 
     public Clazz getById(int id) {
         return DbHelper.executeSQL(Clazz.class, "SELECT id,class_name AS name FROM class WHERE id=?", id);
+    }
+
+    public int getCountByName(String name) {
+        return DbHelper.getScalar("SELECT count(class_name) FROM class WHERE class_name=?", name);
     }
 
     public List<Clazz> getAll() {

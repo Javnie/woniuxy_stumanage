@@ -20,7 +20,7 @@ public class StudentDAO {
     }
 
     public void delete(int id) {
-
+        DbHelper.executeSQL("DELETE FROM student WHERE id=?", id);
     }
 
     public Student getById(int id) {
@@ -71,4 +71,9 @@ public class StudentDAO {
 
         return pageBean;
     }
+
+    public void deleteByClazzID(int clazz_id) {
+        DbHelper.executeSQL("DELETE FROM student WHERE class_id=?", clazz_id);
+    }
+
 }

@@ -8,17 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DbHelper {
+    private static ThreadLocal<Connection> conns = new ThreadLocal<>();
+
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://18.162.120.240:3306/day021", "root", "123456");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+        Connection connection = conns.get();
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://61.139.65.143:46750/day021", "root", "123456");
+                conns.set(connection);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return connection;
     }
@@ -115,6 +121,15 @@ public class DbHelper {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();
+        }
+    }
+
+    public static void closeConnection() {
+        try {
+            if (!getConnection().isClosed()) ;
+            getConnection().close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
