@@ -7,19 +7,6 @@ public class Clazz {
     public Clazz() {
     }
 
-    public Clazz(int id) {
-        this.id = id;
-    }
-
-    public Clazz(String name) {
-        this.name = name;
-    }
-
-    public Clazz(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }

@@ -1,8 +1,10 @@
-package com.woniuxy.test;
+package com.woniuxy.test.service;
 
-public class StudentDAOTest {
+import com.woniuxy.dao.StudentDAO;
+import com.woniuxy.qo.StudentQO;
+
+public class StudentServiceTest {
     public static void main(String[] args) {
-//        new StudentDAO().add(new Student(30111,"Gaga","fema", LocalDate.of(1999,11,11),1));
 //        StudentQO studentQO = new StudentQO();
 //        studentQO.setGender("male");
 //        System.out.println(new StudentDAO().getByCondition(studentQO, 1));

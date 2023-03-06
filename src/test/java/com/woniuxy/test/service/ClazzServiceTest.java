@@ -1,4 +1,4 @@
-package com.woniuxy.test;
+package com.woniuxy.test.service;
 
 import com.woniuxy.entity.Clazz;
 import com.woniuxy.exception.ClazzNameExistException;
@@ -6,7 +6,7 @@ import com.woniuxy.service.ClazzService;
 
 public class ClazzServiceTest {
     public static void main(String[] args) {
-        ClazzService clazzService = new ClazzService();
+//        ClazzService clazzService = new ClazzService();
 //        Clazz clazz = new Clazz();
 //        clazz.setName("7班");
 //        try {
@@ -14,7 +14,6 @@ public class ClazzServiceTest {
 //        } catch (ClazzNameExistException e) {
 //            System.out.println(e.getMessage());
 //        }
-
-        clazzService.deleteById(2);
+//        clazzService.deleteById(2);
     }
 }

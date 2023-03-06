@@ -18,15 +18,6 @@ public class StudentQO {
     public StudentQO() {
     }
 
-    public StudentQO(int stuId, String name, String gender, LocalDate start, LocalDate end, Integer clazzId) {
-        this.stuId = stuId;
-        this.name = name;
-        this.gender = gender;
-        this.start = start;
-        this.end = end;
-        this.clazzId = clazzId;
-    }
-
     public int getStuId() {
         return stuId;
     }

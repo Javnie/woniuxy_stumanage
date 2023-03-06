@@ -20,7 +20,7 @@ public class StudentDAO {
     }
 
     public void delete(int id) {
-        DbHelper.executeSQL("DELETE FROM student WHERE id=?", id);
+
     }
 
     public Student getById(int id) {
@@ -30,8 +30,6 @@ public class StudentDAO {
     public List<Student> getAll() {
         return null;
     }
-
-    //--------------------------------------------
 
     /**
      * 分页查询/根据所给条件进行查询操作

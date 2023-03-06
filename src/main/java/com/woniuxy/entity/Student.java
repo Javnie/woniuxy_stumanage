@@ -13,23 +13,6 @@ public class Student {
     public Student() {
     }
 
-    public Student(int stuId, String name, String gender, LocalDate birthdate, Integer clazzId) {
-        this.stuId = stuId;
-        this.name = name;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.clazzId = clazzId;
-    }
-
-    public Student(int id, int stuId, String name, String gender, LocalDate birthdate, Integer clazzId) {
-        this.id = id;
-        this.stuId = stuId;
-        this.name = name;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.clazzId = clazzId;
-    }
-
     public int getId() {
         return id;
     }
