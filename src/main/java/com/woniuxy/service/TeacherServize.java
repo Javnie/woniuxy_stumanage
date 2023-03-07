@@ -2,20 +2,19 @@ package com.woniuxy.service;
 
 import com.woniuxy.dao.LessonDAO;
 import com.woniuxy.dao.TeacherDAO;
-import com.woniuxy.entity.Teacher;
-import com.woniuxy.utility.ProxyUtil;
+import com.woniuxy.utility.ProxyUdil;
 
 public class TeacherServize {
     public void teacherUnemployed(int id, int newId) {
-        Service service = ProxyUtil.getProxy(Service.class);
+        Servize servize = ProxyUdil.getProxy(Servize.class);
 
-        service.falseAutoCommit();
+        servize.falseAutoCommit();
 
         LessonDAO lessonDAO = new LessonDAO();
         lessonDAO.update(id, newId);
         TeacherDAO teacherDAO = new TeacherDAO();
         teacherDAO.delete(id);
 
-        service.doCommit();
+        servize.doCommit();
     }
 }

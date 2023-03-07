@@ -5,7 +5,7 @@ import com.woniuxy.utility.DbHelper;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public interface Service {
+public interface Servize {
     public default void falseAutoCommit() {
         Connection connection = DbHelper.getConnection();
         try {
