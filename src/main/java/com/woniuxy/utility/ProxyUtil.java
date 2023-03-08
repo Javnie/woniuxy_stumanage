@@ -8,8 +8,8 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ProxyUtil<T> {
-    public <T> T getProxy(Class<T> c) {
+public class ProxyUtil {
+    public static <T> T getProxy(Class<T> c) {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(c);
         enhancer.setCallback(new MethodInterceptor() {

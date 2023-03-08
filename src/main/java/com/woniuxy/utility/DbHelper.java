@@ -126,8 +126,9 @@ public class DbHelper {
 
     public static void closeConnection() {
         try {
-            if (!getConnection().isClosed()) ;
-            getConnection().close();
+            if (!getConnection().isClosed()) {
+                getConnection().close();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
